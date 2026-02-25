@@ -1,7 +1,16 @@
-{ config, pkgs, lib, user, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  user,
+  ...
+}:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   time.timeZone = "Europe/Zurich";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -14,11 +23,11 @@
     alsa.enable = true;
     jack.enable = false;
   };
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
 
   services.dbus.enable = true;
   security.polkit.enable = true;
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
 
   programs.hyprland.enable = true;
 
@@ -60,7 +69,6 @@
 
   services.greetd.restart = true;
 
-
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     MOZ_ENABLE_WAYLAND = "1";
@@ -70,13 +78,17 @@
 
   users.users.${user} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "video"
+      "audio"
+    ];
     shell = pkgs.zsh;
     # Set later with: passwd lukas
   };
 
   security.sudo.wheelNeedsPassword = true;
-
 
   system.stateVersion = "25.05"; # keep consistent once chosen
 }
