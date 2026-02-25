@@ -12,7 +12,7 @@
       ll = "ls -lah";
       gs = "git status";
       vim = "nvim";
-      nrs = "sudo nixos-rebuild switch --flake /etc/nixos#vm";
+      nrs = "sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
       vudo = "sudoedit";
     };
     initContent = ''
