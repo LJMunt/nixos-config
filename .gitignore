@@ -1,7 +1,6 @@
 result
 result-*
 *.qcow2
-hardware-configuration.nix
 .nix-store
 .direnv
 .envrc
