@@ -10,6 +10,8 @@ let
 in
 {
   xdg.configFile."hypr/hyprland.conf".text = ''
+    env = QT_QPA_PLATFORMTHEME,qt6ct
+    env = QT_STYLE_OVERRIDE,kvantum
     # Basic sane defaults
     monitor=,preferred,auto,1
 
@@ -53,6 +55,9 @@ in
 
     # Launcher
     bind = SUPER, R, exec, ${pkgs.wofi}/bin/wofi --show drun --allow-images --layer top
+
+    # File Explorer
+    bind = SUPER, E, exec, ${pkgs.kdePackages.dolphin}/bin/dolphin
 
     # Terminal
     bind = SUPER, Q, exec, ${pkgs.ghostty}/bin/ghostty

@@ -29,13 +29,6 @@
     '';
   };
 
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Adwaita-dark";
-    };
-  };
-
   programs.git.enable = true;
 
   home.packages = with pkgs; [
@@ -60,6 +53,11 @@
     stylua
     gcc
     nixfmt
+    unzip
+    nextcloud-client
+    kdePackages.dolphin
+    kdePackages.qt6ct
+    kdePackages.qtstyleplugin-kvantum
   ];
 
   imports = [
