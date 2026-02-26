@@ -37,10 +37,10 @@
             ./modules/flatpak.nix
             ./hosts/${hostName}/hardware-configuration.nix
             ./hosts/${hostName}/configuration.nix
-            # Home Manager wiring
             (
               { ... }:
               {
+                nixpkgs.config.allowUnfree = true;
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
                 home-manager.users.${user} = import ./home/${user}/home.nix;
@@ -49,6 +49,7 @@
             )
           ];
           specialArgs = { inherit user; };
+
         };
     in
     {

@@ -49,6 +49,7 @@
     brightnessctl
     playerctl
     pavucontrol
+    libnotify
   ];
 
   services.greetd = {
@@ -85,7 +86,6 @@
       "audio"
     ];
     shell = pkgs.zsh;
-    # Set later with: passwd lukas
   };
 
   security.sudo.wheelNeedsPassword = true;

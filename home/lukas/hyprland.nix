@@ -50,8 +50,11 @@ in
     exec-once = ${pkgs.waybar}/bin/waybar
     exec-once = ${pkgs.mako}/bin/mako
     exec-once = ${pkgs.hypridle}/bin/hypridle
+    exec-once = nextcloud
     exec-once = swww-daemon
     exec-once = swww img $HOME/wallpapers/wallpaper.jpg --transition-type simple --transition-duration 1
+    exec-once = wl-paste --type text --watch cliphist store 
+    exec-once = wl-paste --type image --watch cliphist store 
 
     # Launcher
     bind = SUPER, R, exec, ${pkgs.wofi}/bin/wofi --show drun --allow-images --layer top
@@ -62,7 +65,19 @@ in
     # Terminal
     bind = SUPER, Q, exec, ${pkgs.ghostty}/bin/ghostty
 
+    # Clipboard
+    bind = SUPER, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy
+    bind = SUPER SHIFT, V, exec, cliphist wipe && notify-send "Clipboard cleared"
+
+    # Bitwarden
+    bind = SUPER, U, exec, bwm
+    windowrule = match:class wofi, float on
+    windowrule = match:class wofi, center on
+    windowrule = match:class wofi, size 520 420
+
+    # Close window
     bind = SUPER, C, killactive
+
 
     # Screenshot
     bind = SUPER, S, exec, ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.wl-clipboard}/bin/wl-copy
@@ -78,6 +93,7 @@ in
 
     bind = SUPER, B, exec, zen
 
+    bind = SUPER, P, exec, powermenu
     # Exit Hyprland (careful)
     bind = SUPER, M, exit,
   '';

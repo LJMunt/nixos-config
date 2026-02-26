@@ -5,6 +5,20 @@
   ...
 }:
 
+let
+  powermenu = pkgs.writeShellScriptBin "powermenu" ''
+    #!/usr/bin/env zsh
+
+    choice=$(printf " Lock\n Logout\n Reboot\n Shutdown" | wofi --dmenu)
+
+    case "$choice" in
+      *Lock) hyprlock ;;
+      *Logout) hyprctl dispatch exit ;;
+      *Reboot) systemctl reboot ;;
+      *Shutdown) systemctl poweroff ;;
+    esac
+  '';
+in
 {
   home.username = "lukas";
   home.homeDirectory = "/home/lukas";
@@ -19,6 +33,7 @@
       gs = "git status";
       vim = "nvim";
       nrs = "sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
+      neofetch = "fastfetch";
     };
     initContent = ''
       export EDITOR=nvim
@@ -43,6 +58,7 @@
     tealdeer
     bat
     onlyoffice-desktopeditors
+    powermenu
     nerd-fonts.jetbrains-mono
     jetbrains-mono
     hyprpaper
@@ -58,12 +74,42 @@
     kdePackages.dolphin
     kdePackages.qt6ct
     kdePackages.qtstyleplugin-kvantum
+    discord
+    tmux
+    btop
+    nmap
+    cliphist
+    bitwarden-cli
+    bitwarden-menu
+    pinentry-qt
+    wtype
   ];
 
   imports = [
     ./hyprland.nix
     ./zen.nix
   ];
+
+  services.mako = {
+    enable = true;
+    settings = {
+      default-timeout = 4000;
+      max-visible = 4;
+      anchor = "top-right";
+      layer = "overlay";
+      width = 380;
+      height = 140;
+      margin = "12,12";
+      border-size = 2;
+      border-radius = 10;
+      font = "JetBrainsMono 11";
+      background-color = "#1a1b26dd";
+      text-color = "#c0caf5ff";
+      border-color = "#7aa2f7ff";
+
+      sort = "-time";
+    };
+  };
 
   xdg.configFile."ghostty/config" = {
     text = ''
@@ -330,6 +376,13 @@
       }
   '';
 
+  xdg.configFile."wofi/config".text = ''
+    width=520
+    height=420
+    location=center
+    show=drun
+  '';
+
   xdg.configFile."wofi/style.css".text = ''
     window {
       margin: 0px;
@@ -338,6 +391,7 @@
       background-color: alpha(#1a1b26, 0.7);
       font-family: "JetBrainsMono Nerd Font";
       font-size: 14px;
+      max-height: 420px
       }
 
     #input {
@@ -376,6 +430,27 @@
     #text:selected {
       color: #1a1b26
     }
+  '';
+
+  xdg.configFile."bwm/config.ini".text = ''
+    [dmenu]
+    dmenu_command = wofi --dmenu --prompt Bitwarden --lines 4 -theme bwm -i
+    pinentry = pinentry-qt
+    title_path = 25
+
+    [dmenu_passphrase]
+    obscure = true
+    obscure_color = #303030
+
+    [vault]
+    server_1 = https://dungeon.sogrim.ch
+    email_1 = muntwyler.lukas@musys.io
+    twofactor_1 = 0
+    type_library = wtype
+
+    session_timeout_min = 720
+
+    autotype_default = {USERNAME}{TAB}{PASSWORD}{ENTER}
   '';
 
   home.file."wallpapers/wallpaper.jpg" = {
