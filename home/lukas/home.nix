@@ -83,6 +83,7 @@ in
     bitwarden-menu
     pinentry-qt
     wtype
+    termsonic
   ];
 
   imports = [
