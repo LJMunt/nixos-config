@@ -20,9 +20,11 @@ in
     }
 
     general {
-      gaps_in=5
-      gaps_out=12
+      gaps_in=3
+      gaps_out=5
       border_size=2
+      col.active_border = rgba(33ccffee) rgba(ff4499ee) 45deg
+      col.inactive_border = rgba(595959aa)
     }
 
     decoration {
@@ -31,6 +33,10 @@ in
             size = 6
             passes = 2
             new_optimizations = true
+          }
+        shadow {
+            enabled = true
+            range = 6
           }
       }
 
@@ -55,6 +61,12 @@ in
 
     # Screenshot
     bind = SUPER, S, exec, ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.wl-clipboard}/bin/wl-copy
+
+    # Move focus
+    bind = SUPER, left, movefocus, l
+    bind = SUPER, right, movefocus, r
+    bind = SUPER, up, movefocus, u
+    bind = SUPER, down, movefocus, d
 
     # Lock (manual)
     bind = SUPER, L, exec, ${hyprlockCmd}
