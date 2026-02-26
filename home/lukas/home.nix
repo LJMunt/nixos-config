@@ -1,8 +1,14 @@
-{ config, pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 
 {
   home.username = "lukas";
   home.homeDirectory = "/home/lukas";
+
   programs.home-manager.enable = true;
 
   programs.zsh.enable = true;
@@ -23,6 +29,13 @@
     '';
   };
 
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+    };
+  };
+
   programs.git.enable = true;
 
   home.packages = with pkgs; [
@@ -37,7 +50,6 @@
     tealdeer
     bat
     onlyoffice-desktopeditors
-    librewolf
     nerd-fonts.jetbrains-mono
     jetbrains-mono
     hyprpaper
@@ -52,6 +64,7 @@
 
   imports = [
     ./hyprland.nix
+    ./zen.nix
   ];
 
   xdg.configFile."ghostty/config" = {
