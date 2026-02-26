@@ -1,7 +1,13 @@
-{ config, pkgs, lib, user, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  user,
+  ...
+}:
 
 {
-  networking.hostName = "nixos-vm";
+  networking.hostName = "vm";
 
   services.qemuGuest.enable = true;
 

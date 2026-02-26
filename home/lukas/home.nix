@@ -13,7 +13,6 @@
       gs = "git status";
       vim = "nvim";
       nrs = "sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
-      vudo = "sudoedit";
     };
     initContent = ''
       export EDITOR=nvim
@@ -280,26 +279,26 @@
 
   xdg.configFile."nvim/lua/plugins/mason-disable-auto.lua".text = ''
     return {
-      { "williamboman/mason-lspconfig.nvim", enabled = false },
+      { "mason-org/mason-lspconfig.nvim", enabled = false },
+
+       {
+         "mason-org/mason.nvim",
+         opts = function(_, opts)
+           opts = opts or {}
+           opts.automatic_installation = false
+           return opts
+         end,
+       },
 
       {
-        "williamboman/mason.nvim",
-        opts = function(_, opts)
-          opts = opts or {}
-          opts.automatic_installation = false
-          return opts
-        end,
-      },
-
-      {
-        "neovim/nvim-lspconfig",
-        opts = function(_, opts)
-          opts.servers = opts.servers or {}
-          opts.servers.nil_ls = { cmd = { "nil" } }
-          return opts
-        end,
-      },
-    }
+         "neovim/nvim-lspconfig",
+         opts = function(_, opts)
+           opts.servers = opts.servers or {}
+           opts.servers.nil_ls = { cmd = { "nil" } }
+           return opts
+         end,
+       },
+     }
   '';
 
   xdg.configFile."nvim/lua/plugins/nix-format.lua".text = ''
