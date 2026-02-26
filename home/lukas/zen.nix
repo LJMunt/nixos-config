@@ -17,6 +17,10 @@ let
     "extensions.autoDisableScopes" = 0;
     "extensions.pocket.enabled" = false;
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+    "layout.css.prefers-color-scheme.content-override" = 0;
+    "ui.systemUsesDarkTheme" = 1;
+    "browser.theme.dark-private-windows" = true;
+    "widget.content.gtk-theme-override" = "Adwaita-dark";
   };
 
   extensions = [
