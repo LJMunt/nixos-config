@@ -59,7 +59,7 @@ in
     # Lock (manual)
     bind = SUPER, L, exec, ${hyprlockCmd}
 
-    bind = SUPER, B, exec, ${pkgs.librewolf}/bin/librewolf
+    bind = SUPER, B, exec, zen
 
     # Exit Hyprland (careful)
     bind = SUPER, M, exit,
