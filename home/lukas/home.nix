@@ -60,8 +60,8 @@
       font-size = 16
 
       background-opacity = 0.60
-      window-padding-x = 12
-      window-padding-y = 10
+      window-padding-x = 8
+      window-padding-y = 6
 
       cursor-style = block
     '';
@@ -317,6 +317,54 @@
             },
         },
       }
+  '';
+
+  xdg.configFile."wofi/style.css".text = ''
+    window {
+      margin: 0px;
+      border: 2px solid #7aa2f7;
+      border-radius: 12px;
+      background-color: alpha(#1a1b26, 0.7);
+      font-family: "JetBrainsMono Nerd Font";
+      font-size: 14px;
+      }
+
+    #input {
+      margin: 10px;
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      background-color: #1f2335;
+      color: #c0caf5;
+    }
+
+    #inner-box {
+      margin: 5px;
+      border: none;
+      background-color: transparent;
+    }
+
+    #scroll {
+      margin: 0px;
+      border: none;
+    }
+
+    #entry {
+      padding: 8px;
+      margin: 4px;
+      border-radius: 8px;
+      background-color: transparent;
+      color: #c8caf5;
+    }
+
+    #entry:selected {
+      background-color: #7aa2f7;
+      color: #1a1b26;
+    }
+
+    #text:selected {
+      color: #1a1b26
+    }
   '';
 
   home.file."wallpapers/wallpaper.jpg" = {

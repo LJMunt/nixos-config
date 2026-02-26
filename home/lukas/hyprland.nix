@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   hyprlockCmd = "${pkgs.hyprlock}/bin/hyprlock";
@@ -20,6 +25,15 @@ in
       border_size=2
     }
 
+    decoration {
+        blur {
+            enabled = true
+            size = 6
+            passes = 2
+            new_optimizations = true
+          }
+      }
+
     misc {
       disable_hyprland_logo=true
     }
@@ -32,7 +46,7 @@ in
     exec-once = swww img $HOME/wallpapers/wallpaper.jpg --transition-type simple --transition-duration 1
 
     # Launcher
-    bind = SUPER, R, exec, ${pkgs.wofi}/bin/wofi --show drun
+    bind = SUPER, R, exec, ${pkgs.wofi}/bin/wofi --show drun --allow-images --layer top
 
     # Terminal
     bind = SUPER, Q, exec, ${pkgs.ghostty}/bin/ghostty
@@ -50,6 +64,5 @@ in
     # Exit Hyprland (careful)
     bind = SUPER, M, exit,
   '';
-
 
 }
